@@ -28,7 +28,8 @@ def pregunta_09():
     # Leer el archivo tbl0.tsv
     df = pd.read_csv("files/input/tbl0.tsv", sep="\t")
     
-    # Convertir la columna c3 a datetime y extraer el año
-    df['year'] = pd.to_datetime(df['c3']).dt.year
+    # Extraer el año directamente del string de fecha (formato YYYY-MM-DD)
+    # Esto evita problemas con fechas inválidas como 1999-02-29
+    df['year'] = df['c3'].str[:4].astype(int)
     
     return df
