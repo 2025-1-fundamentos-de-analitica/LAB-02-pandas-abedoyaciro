@@ -22,3 +22,20 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+    import pandas as pd
+    
+    # Leer el archivo tbl2.tsv
+    df = pd.read_csv("files/input/tbl2.tsv", sep="\t")
+    
+    # Crear una nueva columna combinando c5a y c5b con ':'
+    df['c5_combined'] = df['c5a'] + ':' + df['c5b'].astype(str)
+    
+    # Agrupar por c0 y concatenar los valores ordenados con ','
+    resultado = df.groupby('c0')['c5_combined'].apply(
+        lambda x: ','.join(sorted(x))
+    ).reset_index()
+    
+    # Renombrar la columna para que coincida con el resultado esperado
+    resultado.rename(columns={'c5_combined': 'c5'}, inplace=True)
+    
+    return resultado
