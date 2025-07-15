@@ -30,6 +30,6 @@ def pregunta_09():
     
     # Extraer el año directamente del string de fecha (formato YYYY-MM-DD)
     # Esto evita problemas con fechas inválidas como 1999-02-29
-    df['year'] = df['c3'].str[:4].astype(int)
+    df['year'] = df['c3'].str[:4]
     
     return df
